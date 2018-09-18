@@ -20,7 +20,12 @@ pipeline {
                 }
             }
             steps {
-                sh "jupyter-nbconvert --to python --stdout 'NIN registrations to overseas nationals.ipynb' | ipython"
+               script {
+                    def notebooks = findFiles(glob: '*.ipynb')
+                    for (int i = 0; i < notebooks.size(); i++) {
+                        sh "jupyter-nbconvert --to python --stdout '${notebooks[i].name}' | ipython"
+                    }
+                }
             }
         }
         stage('Upload draftset') {
@@ -30,7 +35,7 @@ pipeline {
                     for (def file : findFiles(glob: 'out/*.csv')) {
                         csvs.add("out/${file.name}")
                     }
-                    uploadDraftset('National Insurance Number Allocations to Adult Overseas Nationals', csvs,
+                    uploadDraftset('NISRA ENIM', csvs,
                                    'https://github.com/ONS-OpenData/ref_migration/raw/master/columns.csv')
                 }
             }
