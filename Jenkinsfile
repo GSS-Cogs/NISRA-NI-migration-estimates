@@ -20,12 +20,7 @@ pipeline {
                 }
             }
             steps {
-               script {
-                    def notebooks = findFiles(glob: '*.ipynb')
-                    for (int i = 0; i < notebooks.size(); i++) {
-                        sh "jupyter-nbconvert --to python --stdout '${notebooks[i].name}' | ipython"
-                    }
-                }
+                sh "jupyter-nbconvert --to python --stdout 'main.ipynb' | ipython"
             }
         }
         stage('Upload draftset') {
@@ -35,8 +30,7 @@ pipeline {
                     for (def file : findFiles(glob: 'out/*.csv')) {
                         csvs.add("out/${file.name}")
                     }
-                    uploadDraftset('NISRA ENIM', csvs,
-                                   'https://github.com/ONS-OpenData/ref_migration/raw/master/columns.csv')
+                    uploadTidy(csvs, 'https://github.com/ONS-OpenData/ref_migration/raw/master/columns.csv')
                 }
             }
         }
