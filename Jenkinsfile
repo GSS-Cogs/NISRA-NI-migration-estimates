@@ -65,7 +65,7 @@ pipeline {
                     String data = """{"idValue": "${config['results'][currentBuild.currentResult]}"}"""
                     def response = httpRequest(contentType: 'APPLICATION_JSON',
                       httpMode: 'PUT',
-                      url: "https://api.trello.com/1/card/5b4728560fe67f87ff11202b/customField/${config['field']}/item?key=${config['key']}&token=${config['token']}",
+                      url: "https://api.trello.com/1/card/5b9bb9cbf28e5f6a27594a66/customField/${config['field']}/item?key=${config['key']}&token=${config['token']}",
                       requestBody: data
                     )
                 }
