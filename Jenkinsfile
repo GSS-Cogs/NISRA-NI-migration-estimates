@@ -32,7 +32,9 @@ pipeline {
             }
             steps {
                 script {
-                    sh "csvlint -s schema.json"
+                    ansiColor('xterm') {
+                        sh "csvlint -s schema.json"
+                    }
                 }
             }
         }
@@ -60,15 +62,7 @@ pipeline {
         always {
             script {
                 archiveArtifacts 'out/*'
-                configFileProvider([configFile(fileId: 'trello', variable: 'configfile')]) {
-                    def config = readJSON(text: readFile(file: configfile))
-                    String data = """{"idValue": "${config['results'][currentBuild.currentResult]}"}"""
-                    def response = httpRequest(contentType: 'APPLICATION_JSON',
-                      httpMode: 'PUT',
-                      url: "https://api.trello.com/1/card/5b9bb9cbf28e5f6a27594a66/customField/${config['field']}/item?key=${config['key']}&token=${config['token']}",
-                      requestBody: data
-                    )
-                }
+                updateCard '5b9bb9cbf28e5f6a27594a66'
             }
         }
         success {
