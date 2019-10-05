@@ -2,10 +2,10 @@
   "@context": ["http://www.w3.org/ns/csvw", {"@language": "en"}],
   "tables": [
     {
-      "url": "https://ons-opendata.github.io/ref_common/codelists/age-groups.csv",
+      "url": "https://gss-cogs.github.io/ref_common/codelists/age-groups.csv",
       "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
     }, {
-      "url": "https://ons-opendata.github.io/ref_migration/codelists/population-change-component.csv",
+      "url": "https://gss-cogs.github.io/ref_migration/codelists/population-change-component.csv",
       "tableSchema": "https://ons-opendata.github.io/ref_migration/codelist-schema.json"
     }, {
       "url": "out/migration_nisra.csv",
@@ -63,13 +63,13 @@
         "foreignKeys": [{
           "columnReference": "age",
           "reference": {
-            "resource": "https://ons-opendata.github.io/ref_common/codelists/age-groups.csv",
+            "resource": "https://gss-cogs.github.io/ref_common/codelists/age-groups.csv",
             "columnReference": "notation"
           }
         }, {
           "columnReference": "populationChangeComponent",
           "reference": {
-            "resource": "https://ons-opendata.github.io/ref_migration/codelists/population-change-component.csv",
+            "resource": "https://gss-cogs.github.io/ref_migration/codelists/population-change-component.csv",
             "columnReference": "label"
           }
         }],
