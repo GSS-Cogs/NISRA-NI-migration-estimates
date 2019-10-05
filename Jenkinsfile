@@ -15,7 +15,7 @@ pipeline {
         stage('Transform') {
             agent {
                 docker {
-                    image 'csscogs/databaker'
+                    image 'gsscogs/databaker'
                     reuseNode true
                 }
             }
