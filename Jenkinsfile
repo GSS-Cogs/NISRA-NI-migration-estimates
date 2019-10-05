@@ -15,7 +15,7 @@ pipeline {
         stage('Transform') {
             agent {
                 docker {
-                    image 'cloudfluff/databaker'
+                    image 'csscogs/databaker'
                     reuseNode true
                 }
             }
@@ -26,7 +26,7 @@ pipeline {
         stage('Test') {
             agent {
                 docker {
-                    image 'cloudfluff/csvlint'
+                    image 'gsscogs/csvlint'
                     reuseNode true
                 }
             }
@@ -46,7 +46,7 @@ pipeline {
                         csvs.add("out/${file.name}")
                     }
                     jobDraft.replace()
-                    uploadTidy(csvs, 'https://github.com/ONS-OpenData/ref_migration/raw/master/columns.csv')
+                    uploadTidy(csvs, 'https://github.com/GSS-Cogs/ref_migration/raw/master/columns.csv')
                 }
             }
         }
